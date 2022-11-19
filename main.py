@@ -6,29 +6,37 @@ def hit(key):
     pyautogui.keyDown(key)
 
 
-def screenshot():
-    image = ImageGrab.grab().convert("L")
-    return image
+def is_collide(key):
+    for i in range(400, 415):
+        for j in range(530, 555):
+            if key[i, j] < 100:
+                hit("Down")
+                return
 
-
-def is_collide(data):
     for i in range(300, 620):
         for j in range(640, 670):
-            if data[i, j] < 100:
+            if key[i, j] < 100:
                 hit("Up")
-                return True
+                return
 
-    for i in range(300, 400):
-        for j in range(550, 630):
-            if data[i, j] < 0:
-                hit("down")
-                return True
-    return False
+    return
 
 
 if __name__ == "__main__":
     time.sleep(3)
     while True:
-        image = screenshot()
+        image = ImageGrab.grab().convert("L")
         data = image.load()
         is_collide(data)
+
+    # for i in range(300, 620):
+    #     for j in range(530, 565):
+    #         data[i, j] = 0
+    # for i in range(300, 620):
+    #     for j in range(640, 670):
+    #         data[i, j] = 100
+    # #
+    # image.show()
+
+
+
